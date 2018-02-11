@@ -1,6 +1,6 @@
 var redux = require('redux');
 var thunk = require('redux-thunk').default;
-var {searchTextReducer, todosReducer, mapReducer} = require('./../reducers');
+var {searchTextReducer, todosReducer, mapReducer} = require('../reducers/reducers');
 
 export var configure = () => {
     var reducer = redux.combineReducers({
