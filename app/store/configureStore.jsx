@@ -1,12 +1,12 @@
 var redux = require('redux');
 var thunk = require('redux-thunk').default;
-var {searchTextReducer, todosReducer, mapReducer} = require('../reducers/reducers');
+var {searchTextReducer, todosReducer, showCompletedReducer} = require('../reducers/reducers');
 
 export var configure = () => {
     var reducer = redux.combineReducers({
         searchText: searchTextReducer,
         todos: todosReducer,
-        map: mapReducer
+        showCompleted: showCompletedReducer
     });
 
     var store = redux.createStore(reducer, redux.compose(
