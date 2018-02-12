@@ -1,3 +1,6 @@
+var uuid = require('node-uuid');
+var moment = require('moment');
+
 export var searchTextReducer = (state = '', action) => {
     switch (action.type) {
         case 'SET_SEARCH_TEXT':
@@ -21,29 +24,29 @@ export var todosReducer = (state = [], action) => {
         case 'ADD_TODO':
             return [
                 ...state,
-                action.todo];
+                {
+                    id: uuid(),
+                    text: action.text,
+                    completed: false,
+                    createdAt: moment().unix(),
+                    completedAt: undefined
+                }];
         case 'REMOVE_TODO':
             return [
                 state.filter((todo) => todo.id !== action.id)
             ];
-        default:
-            return state;
-    }
-};
+        case 'TOGGLE_TODO':
+            return state.map((todo) => {
+                if (todo.id === action.id) {
+                    return {
+                        ...todo,
+                        completedAt: todo.completed ? moment.unix() : undefined,
+                        completed: !todo.completed
+                    }
+                }
+                return todo;
 
-
-export var mapReducer = (state = {isFetching: false, url: undefined}, action) => {
-    switch (action.type) {
-        case 'START_LOCATION_FETCH':
-            return {
-                isFetching: true,
-                url: undefined
-            };
-        case 'COMPLETE_LOCATION_FETCH':
-            return {
-                isFetching: false,
-                url: action.url
-            };
+            })
         default:
             return state;
     }
