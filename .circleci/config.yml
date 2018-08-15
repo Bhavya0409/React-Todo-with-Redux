@@ -6,16 +6,16 @@ jobs:
       - image: circleci/node:7-browsers
     steps:
       - checkout
-      - run: npm install
-      - run: npm test
-      - run: ./node_modules/.bin/webpack
-  deploy:
-    docker:
-      - image: buildpack-deps:trusty
-    steps:
-      - checkout
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Run Unit Tests
+          command: npm test
+      - run:
+          name: Run Webpack to Compile Project
+          command: ./node_modules/.bin/webpack
       - run:
           name: Deploy Master to Heroku
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
-      
