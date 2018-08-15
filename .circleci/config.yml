@@ -9,9 +9,8 @@ jobs:
       - run: npm install
       - run: npm test
       - run: ./node_modules/.bin/webpack
-
-deployment:
-  prod:
-    branch: master
-    heroku:
-      appname: lit-journey-25446
+  deployment:
+    prod:
+      branch: master
+      heroku:
+        appname: lit-journey-25446
