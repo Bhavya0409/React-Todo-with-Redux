@@ -9,8 +9,10 @@ jobs:
       - run: npm install
       - run: npm test
       - run: ./node_modules/.bin/webpack
-  deployment:
-    prod:
-      branch: master
-      heroku:
-        appname: lit-journey-25446
+  deploy:
+    steps:
+      - checkout
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
