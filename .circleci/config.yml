@@ -13,9 +13,6 @@ jobs:
           name: Run Unit Tests
           command: npm test
       - run:
-          name: Run Webpack to Compile Project
-          command: ./node_modules/.bin/webpack
-      - run:
           name: Deploy Master to Heroku
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
