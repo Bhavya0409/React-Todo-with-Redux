@@ -24,7 +24,7 @@ describe('TodoApp', () => {
       );
 
       var $el = $(ReactDOM.findDOMNode(provider));
-      expect($el.find('.page-title').text()).toBe('Todo App');
+      expect($el.find('.page-title').text()).toBe('Todo App Test');
   })
 
   it('should render TodoList', () => {
