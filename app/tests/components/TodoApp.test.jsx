@@ -15,18 +15,6 @@ describe('TodoApp', () => {
     expect(TodoApp).toExist();
   });
 
-  it('should have Todo App as a title', () => {
-      var store = configureStore.configure();
-      var provider = TestUtils.renderIntoDocument(
-          <Provider store = {store}>
-              <TodoApp/>
-          </Provider>
-      );
-
-      var $el = $(ReactDOM.findDOMNode(provider));
-      expect($el.find('.page-title').text()).toBe('Todo App Test');
-  })
-
   it('should render TodoList', () => {
     var store = configureStore.configure();
     var provider = TestUtils.renderIntoDocument(

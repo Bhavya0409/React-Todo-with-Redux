@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "karma start",
-    "start": "concurrently \"node server.js\" \"./node_modules/.bin/webpack -w\""
+    "start": "concurrently \"node server.js\" \"webpack -w\""
   },
   "author": "Bhavya Shah",
   "license": "",
   "dependencies": {
     "axios": "^0.9.1",
     "express": "^4.13.4",
+    "firebase": "^3.0.2",
     "react": "^0.14.7",
     "react-addons-test-utils": "^0.14.7",
     "react-dom": "^0.14.7",
@@ -41,6 +42,7 @@
     "node-uuid": "^1.4.7",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
+    "redux-mock-store": "^1.0.3",
     "redux-thunk": "^2.2.0",
     "sass-loader": "^3.1.2",
     "script-loader": "^0.6.1",
