@@ -37,7 +37,7 @@ describe('Actions', () => {
         expect(res).toEqual(action);
     });
 
-    it('should create todo and dispatch acd todo', (done) => {
+    it('should create todo and dispatch add todo', (done) => {
         const store = createMockStore({});
         const todoText = 'My todo item';
 
@@ -96,12 +96,18 @@ describe('Actions', () => {
         let testTodoRef;
 
         beforeEach((done) => {
-            testTodoRef = firebaseRef.child('todos').push();
-            testTodoRef.set({
-                text: 'something to do',
-                completed: false,
-                completedAt: 123
-            }).then(() => done())
+            const todosRef = firebaseRef.child('todos');
+            todosRef.remove().then(() => {
+                testTodoRef = firebaseRef.child('todos').push();
+
+                return testTodoRef.set({
+                    text: 'something to do',
+                    completed: false,
+                    completedAt: 123
+                })
+            })
+                .then(() => done())
+                .catch(done);
         });
 
         afterEach((done) => {
@@ -129,5 +135,20 @@ describe('Actions', () => {
                 done();
             }, done)
         });
+
+        it('should populate todos and dispatch START_ADD_TODOS', (done) => {
+            const store = createMockStore({});
+            const action = actions.startAddTodos();
+
+            store.dispatch(action).then(() => {
+                const mockActions = store.getActions();
+                expect(mockActions[0].type).toEqual('ADD_TODOS');
+
+                expect(mockActions[0].todos.length).toEqual(1);
+
+                expect(mockActions[0].todos[0].text).toEqual('something to do');
+                done();
+            }, done)
+        })
     });
 });
